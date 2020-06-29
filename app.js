@@ -5,8 +5,18 @@ const express            = require('express'),
       expressSanitizer   = require('express-sanitizer'),
       methodOverride     = require('method-override')
 
+
+
 //APP CONFIG          
-mongoose.connect('mongodb://localhost:27017/music_cata_app', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+mongoose.connect('mongodb+srv://arya123:password1234567890@crudclust-gc08c.mongodb.net/<dbname>?retryWrites=true&w=majority', { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true,
+    useFindAndModify: false
+    }).then(() => {
+        console.log('Connected to DB!')
+    }).catch(err => {
+        console.log('ERROR', err.message);
+    })
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
