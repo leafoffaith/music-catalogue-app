@@ -1,13 +1,14 @@
 <%- include('partials/header')%>
         <div class="ui container">
             <div class="ui huge header">RESTful Albums</div>
+            <a href="/albums/new">Add new album</a>
             <div class="ui top  attached segment">
                 <div class="ui divided items">
                     <% catalogs.forEach(function(catalog){ %>
                         <h1><%=catalog.title%></h1>
                         <h2><%=catalog.artist%></h2>
                         <h2><%=catalog.body%></h2>
-                        <a href="/albums/new">Add new album</a>
+                        <a href="/albums/<%=catalog._id%>"><h2>Read more about this album</h2></a>
                     <% }) %>
                 </div>   
             </div>

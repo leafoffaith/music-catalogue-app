@@ -4,14 +4,14 @@
     <div class="ui huge header"><%= catalog.title %></div>
     <div class="ui top attached ">
         <div class="item">
-            <p><%= catalog.artist %></p>
+            <h2><%= catalog.artist %></h2>
         </div>
         <div class="item">
             <div class="description">
                 <p><%= catalog.body %></p>
             </div>
         </div>
-            </form>
+        <a href="/albums/<%=catalog._id%>/edit"><p>Edit this album</p></a>
     </div>  
 </div>
 <%- include('partials/footer')%>
