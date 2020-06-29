@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+<div class="ui main text container segment">
+    <div class="ui huge header"><%= catalog.title %></div>
+    <div class="ui top attached ">
+        <div class="item">
+            <p><%= catalog.artist %></p>
+        </div>
+        <div class="item">
+            <div class="description">
+                <p><%= catalog.body %></p>
+            </div>
+        </div>
+            <!-- <a class="ui orange basic button" href="/blogs/<%= blog._id %>/edit">Edit</a> -->
+            <!-- <form id="delete" action="/blogs/<%= blog._id %>?_method=DELETE" method="POST"> -->
+                <!-- <button class="ui red basic button">Delete</button> -->
+            </form>
+    </div>  
+</div>
+<%- include('partials/footer')%>
