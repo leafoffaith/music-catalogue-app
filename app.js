@@ -60,7 +60,7 @@ app.post('/albums', (req, res) =>  {
 });
 
 //SHOW
-app.get('albums/:id', (req, res) =>{
+app.get('/albums/:id', (req, res) =>{
     Catalog.findById(req.params.id, (err, foundCatalog) => {
         if(err){
             res.redirect('/albums');
@@ -71,9 +71,14 @@ app.get('albums/:id', (req, res) =>{
     });
 });
 
+//UPDATE ROUTE
+
 //PORT
 const port = process.env.PORT || 3000;
 
 app.listen(port, () =>{
     console.log(`Now listening on Port: ${port}`);
 })
+
+
+
