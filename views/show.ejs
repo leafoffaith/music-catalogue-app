@@ -1,20 +1,21 @@
 <%- include('partials/header') %>
 
-<div class="ui main text container segment">
-    <div class="ui huge header"><%= catalog.title %></div>
-    <div class="ui top attached ">
-        <div class="item">
-            <h2><%= catalog.artist %></h2>
+<div class="ui text container">
+    <div class="ui raised very padded text container segment back">
+        <a href="/albums"><i class="arrow circle left outline icon black"></i></a>
+        <div class="container">
+            <a href="https://google.com">
+                <img class="ui centered medium circular image" src="<%=catalog.art%>">
+              </a>
         </div>
-        <div class="item">
-            <div class="description">
-                <p><%= catalog.body %></p>
-            </div>
-        </div>
-        <a href="/albums/<%=catalog._id%>/edit"><p>Edit this album</p></a>
+        <h2 class="ui header"><%= catalog.title%></h2>
+        <h3 class="ui header"><%= catalog.artist%></h2>
+        <p><%= catalog.body %></p>
+        <p><a href="/albums/<%=catalog._id%>/edit"><p>Edit</p></a></p>
         <form id="delete" action="/albums/<%= catalog._id %>?_method=DELETE" method="POST">
-            <button class="ui red basic button">Delete</button>
-        </form>
-    </div>  
+                <button class="ui red button">Delete</button>
+            </form>
+        <p></p>
+      </div>
 </div>
 <%- include('partials/footer')%>

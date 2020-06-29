@@ -10,6 +10,7 @@ mongoose.connect('mongodb://localhost:27017/music_cata_app', {useNewUrlParser: t
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
+app.use(express.static("public"));
 app.use(methodOverride("_method"));
 
 
@@ -18,6 +19,7 @@ let cataSchema = new mongoose.Schema({
     title: String,
     artist: String,
     body: String,
+    art: String
 });
 
 let Catalog = mongoose.model('Catalog', cataSchema);

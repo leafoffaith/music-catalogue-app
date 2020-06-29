@@ -1,16 +1,41 @@
 <%- include('partials/header')%>
-        <div class="ui container">
-            <div class="ui huge header">RESTful Albums</div>
-            <a href="/albums/new">Add new album</a>
-            <div class="ui top  attached segment">
-                <div class="ui divided items">
-                    <% catalogs.forEach(function(catalog){ %>
-                        <h1><%=catalog.title%></h1>
-                        <h2><%=catalog.artist%></h2>
-                        <h2><%=catalog.body%></h2>
-                        <a href="/albums/<%=catalog._id%>"><h2>Read more about this album</h2></a>
-                    <% }) %>
-                </div>   
+
+<div class="ui raised segment">
+    <div class="ui main text container">
+        <div class="ui divided items">
+          <div class="ui text container">
+            <h1 class=" black ui center aligned icon header small">
+              <i class="play icon"></i>
+            </h1>
+            </div>  
+            <% catalogs.forEach(function(catalog) { %>
+            <div class="item">
+              <div class="image">
+                <img class="ui medium rounded image" src="<%=catalog.art%>">
+              </div>
+              <div class="content">
+                <a href="/albums/<%=catalog._id%>" class="header"><%=catalog.title%></a>
+                <div class="meta">
+                  <span><%=catalog.artist%></span>
+                </div>
+                <div class="description">
+                  <p><span><%- catalog.body.substring(0 - 50) %>...</span></p>
+                </div>
+                <div class="extra">
+                    <span><a href="/albums/<%=catalog._id%>">Read More</a></span>
+                </div>
+              </div>
             </div>
+            <div class="ui hidden section divider"></div>
+            <% }) %>
+            
+            <div class="ui segment">
+              <p><a class="header" href="/albums/new">Add new album</a></p>
+            </div>           
         </div>
+    </div>
+  </div> 
+    
+    
+
 <%- include('partials/footer')%>
