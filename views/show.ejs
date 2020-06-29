@@ -12,6 +12,9 @@
             </div>
         </div>
         <a href="/albums/<%=catalog._id%>/edit"><p>Edit this album</p></a>
+        <form id="delete" action="/albums/<%= catalog._id %>?_method=DELETE" method="POST">
+            <button class="ui red basic button">Delete</button>
+        </form>
     </div>  
 </div>
 <%- include('partials/footer')%>

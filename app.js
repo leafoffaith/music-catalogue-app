@@ -105,6 +105,21 @@ app.put('/albums/:id', (req, res) => {
     });
 });
 
+//DELETE ROUTE
+app.delete('/albums/:id' , (req, res) => {
+    Catalog.findByIdAndRemove(req.params.id, (err, removed) => {
+        if(err){
+            console.log(err);
+            console.log(req.params.body);
+            console.log("==============");
+            res.redirect('/albums');
+        }
+        else{
+            res.redirect('/albums');
+        }
+    });
+});
+
 //PORT
 const port = process.env.PORT || 3000;
 
