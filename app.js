@@ -1,17 +1,17 @@
-const { authenticate } = require('passport');
+// const { authenticate } = require('passport');
 
 const express            = require('express'),
       app                = express(),
       mongoose           = require('mongoose'),
       bodyParser         = require('body-parser'),
       expressSanitizer   = require('express-sanitizer'),
-      methodOverride     = require('method-override'),
-      passport           = require('passport'),
-      LocalSrategy       = require('passport-local'),
-      User               = require('./models/users');
+      methodOverride     = require('method-override')
+    //   passport           = require('passport'),
+    //   LocalSrategy       = require('passport-local'),
+    //   User               = require('./models/users');
 
 //APP CONFIG          
-mongoose.connect('mongodb+srv://arya123:password1234567890@crudclust-gc08c.mongodb.net/<dbname>?retryWrites=true&w=majority', { 
+mongoose.connect('mongodb+srv://blunder:lololxd1@crudclust-gc08c.mongodb.net/<dbname>?retryWrites=true&w=majority', { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
     useFindAndModify: false
@@ -28,17 +28,17 @@ app.use(express.static("public"));
 app.use(methodOverride("_method"));
 
 //PASSPORT CONFIG
-app.use(require("express-session")({
-    secret: "Nico wins cutest dog!",
-    resave: false,
-    saveUnititialized: false,
-    cookie: { secure: true }
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new LocalSrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.serializeUser(User.deserializeUser());
+// app.use(require("express-session")({
+//     secret: "Nico wins cutest dog!",
+//     resave: false,
+//     saveUnititialized: false,
+//     cookie: { secure: true }
+// }));
+// app.use(passport.initialize());
+// app.use(passport.session());
+// passport.use(new LocalSrategy(User.authenticate()));
+// passport.serializeUser(User.serializeUser());
+// passport.serializeUser(User.deserializeUser());
 
 //MODEL CONFIG
 let cataSchema = new mongoose.Schema({
@@ -74,7 +74,7 @@ app.get('/albums', (req, res) => {
 }); 
 
 //NEW ALBUM
-app.get('/albums/new', isLoggedIn, (req, res) => {
+app.get('/albums/new',(req, res) => {
     res.render("new");
 });
 
@@ -152,49 +152,49 @@ app.delete('/albums/:id' , (req, res) => {
 //AUTH ROUTES
 //===========
 
-//Show register form
-app.get('/register',(req, res) => {
-    res.render('register');
-})
+// //Show register form
+// app.get('/register',(req, res) => {
+//     res.render('register');
+// })
 
-//SIGN UP
-app.post('/register', (req, res) => {
-    let newUser = new User({username: req.body.username});
-    User.register(newUser, req.body.password, (err, user) => {
-        if(err){
-            console.log(err);
-            return res.redirect("register")
-        }
-        passport.authenticate("local")(req, res, () => {
-            res.redirect('/albums')
-        })
-    })
+// //SIGN UP
+// app.post('/register', (req, res) => {
+//     let newUser = new User({username: req.body.username});
+//     User.register(newUser, req.body.password, (err, user) => {
+//         if(err){
+//             console.log(err);
+//             return res.redirect("register")
+//         }
+//         passport.authenticate("local")(req, res, () => {
+//             res.redirect('/albums')
+//         })
+//     })
    
-});
+// });
 
-//SHOW LOGIN
-app.get("/login", (req, res) => {
-    res.render('login')
-})
-//handling login logic
-app.post('/login', passport.authenticate("local", {
-    successRedirect: "/albums",
-    failureRedirect: "/login"
-}), (req, res) => {    
-})
+// //SHOW LOGIN
+// app.get("/login", (req, res) => {
+//     res.render('login')
+// })
+// //handling login logic
+// app.post('/login', passport.authenticate("local", {
+//     successRedirect: "/albums",
+//     failureRedirect: "/login"
+// }), (req, res) => {    
+// })
 
-//LOGOUT ROUTE
-app.get("/logout", (req, res) => {
-    req.logout();
-    res.redirect("/albums")
-})
+// //LOGOUT ROUTE
+// app.get("/logout", (req, res) => {
+//     req.logout();
+//     res.redirect("/albums")
+// })
 
-function isLoggedIn(req, res, next){
-    if(req.isAuthenticated()){
-        return next();
-    }
-    res.redirect("/login")
-}
+// function isLoggedIn(req, res, next){
+//     if(req.isAuthenticated()){
+//         return next();
+//     }
+//     res.redirect("/login")
+// }
 
 //PORT
 const port = process.env.PORT || 3000;
