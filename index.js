@@ -31,7 +31,7 @@ const REDIRECT_URI = process.env.REDIRECT_URI;
 
 
 //APP CONFIG          
-mongoose.connect('mongodb+srv://blunder:lololxd1@crudclust-gc08c.mongodb.net/<dbname>?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGO_AUTH, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
@@ -122,19 +122,19 @@ app.get('/callback', (req, res) => {
 
     // console.log(code)
     axios({
-        method: 'post',
-        url: 'https://accounts.spotify.com/api/token',
-        data: queryString.stringify({
-            grant_type: 'authorization_code',
-            code: code,
-            redirect_uri: REDIRECT_URI
-        }),
-        headers: {
-            'content-type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Basic ' + (new Buffer(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64'))
-        },
-        json: true
-    })
+            method: 'post',
+            url: 'https://accounts.spotify.com/api/token',
+            data: queryString.stringify({
+                grant_type: 'authorization_code',
+                code: code,
+                redirect_uri: REDIRECT_URI
+            }),
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Basic ' + (new Buffer(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64'))
+            },
+            json: true
+        })
         .then(response => {
             if (response.status === 200) {
                 // console.log(response)
@@ -149,10 +149,10 @@ app.get('/callback', (req, res) => {
                 console.log("==================")
                 console.log(refresh_token)
                 console.log("==================")
-                
+
                 //rerdirect to react app
                 res.redirect(`http://localhost:3000/?${queryParams}`)
-                //pass along tokens in query params
+                    //pass along tokens in query params
 
                 // axios.get('https://api.spotify.com/v1/me', {
                 //     headers: {
@@ -233,13 +233,13 @@ app.get('/refresh_token', (req, res) => {
 //   });
 
 app.get('/trending', (req, res) => {
-    console.log('you have reached the trending page')
-    res.send("THIS IS THE TRENDING PAGE YAY!");
-})
-//TO IMPLEMENT
-//on ('/')
-// it needs to first redirect to the trending page which will fetch Spotify trending based on location
-// if location is not accessible or provided it defaults to the US top 50 pop
+        console.log('you have reached the trending page')
+        res.send("THIS IS THE TRENDING PAGE YAY!");
+    })
+    //TO IMPLEMENT
+    //on ('/')
+    // it needs to first redirect to the trending page which will fetch Spotify trending based on location
+    // if location is not accessible or provided it defaults to the US top 50 pop
 
 //albums will show list based on logged in user only, so navbar will have 'your list' which redirects to /albums
 //but first checks whether or not the user is logged in
@@ -251,7 +251,7 @@ app.get('/trending', (req, res) => {
 
 
 app.get('/albums', (req, res) => {
-    Catalog.find({}, function (err, catalogs) {
+    Catalog.find({}, function(err, catalogs) {
         if (err) {
             console.log("ERROR!");
         } else {
@@ -269,20 +269,20 @@ app.get('/albums/new', (req, res) => {
 app.post('/albums', (req, res) => {
     // console.log(req.body);
     const item = new Catalog({
-        title: req.body.title,
-        artist: req.body.artist,
-        body: req.body.postBody,
-        art: req.body.art
-    })
-    // Catalog.create(req.body.catalog, (err, newCatlog) => {
-    //     if(err){
-    //         console.log(err)
-    //     }
-    //     else{
-    //         console.log(newCatlog);
-    //         res.redirect('/albums');
-    //     }
-    // });
+            title: req.body.title,
+            artist: req.body.artist,
+            body: req.body.postBody,
+            art: req.body.art
+        })
+        // Catalog.create(req.body.catalog, (err, newCatlog) => {
+        //     if(err){
+        //         console.log(err)
+        //     }
+        //     else{
+        //         console.log(newCatlog);
+        //         res.redirect('/albums');
+        //     }
+        // });
     try {
         console.log(item)
         item.save()
@@ -299,8 +299,7 @@ app.get('/albums/:id', (req, res) => {
     Catalog.findById(req.params.id, (err, foundCatalog) => {
         if (err) {
             res.redirect('/albums');
-        }
-        else {
+        } else {
             res.render('show', { catalog: foundCatalog });
         }
     });
@@ -311,8 +310,7 @@ app.get('/albums/:id/edit', (req, res) => {
     Catalog.findById(req.params.id, (err, foundCatalog) => {
         if (err) {
             res.redirect('/albums');
-        }
-        else {
+        } else {
             res.render('edit', { catalog: foundCatalog })
         }
     });
@@ -329,8 +327,7 @@ app.put('/albums/:id', (req, res) => {
             console.log(err);
             console.log("===============");
             res.redirect('/albums');
-        }
-        else {
+        } else {
             res.redirect("/albums/" + req.params.id);
         }
     });
@@ -344,8 +341,7 @@ app.delete('/albums/:id', (req, res) => {
             console.log(req.params.body);
             console.log("==============");
             res.redirect('/albums');
-        }
-        else {
+        } else {
             res.redirect('/albums');
         }
     });
