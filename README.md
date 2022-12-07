@@ -5,3 +5,5 @@ This is a basic CRUD app! Used for storing and keeping track of your favourite a
 UPDATE: Added delete route and styling. 
 Deployed to Heroku.
 
+UPDATE: App being reworked to implement Spotify's Web API
+
