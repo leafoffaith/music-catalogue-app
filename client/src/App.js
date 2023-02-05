@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './spotify'
 import logo from './logo.svg';
 import './App.css';
-// import styled from 'styled-components';
-// import { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import { catchErrors } from './utils';
 import {
   BrowserRouter as Router,
@@ -12,7 +12,6 @@ import {
   Link, 
   useLocation
 } from 'react-router-dom';
-import styled from 'styled-components/macro'
 
 
 function ScrollToTop() {
@@ -34,27 +33,36 @@ function ScrollToTop() {
 //   display: inline-block;
 //   `;
 
-// const GlobalStyle = createGlobalStyle`
-// html {
-//   box-sizing: border-box;
-// }
+const GlobalStyle = createGlobalStyle`
+:root{
+  --black: #121212;
+  --green: #1db954;
+  --white: #ffffff;
 
-// *,
-// *:before,
-// *:after {
-//   box-sizing: inherit;
-// }
+  --font: 'Circular Std', -apple-systen, BlinkMacSystemFont, system-ui, sans-serif;
 
-// body {
-//   margin: 0;
-//   padding: 0;
-//   background-color: black;
-//   color: white;
-// }
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: white;
+}`
 
 const StyledLoginButton = styled.a`
-  background-color: green;
-  color: white;
+  background-color: var(--green);
+  color: var(--white);
   padding: 10px 20px;
   margin: 20px auto;
   border-radius: 30px;
@@ -95,17 +103,20 @@ function App() {
   }, [])
 
 
-  // The second argument of useEffect function is referred to as the “dependency array”. When the variable included inside the array didn’t change, the function passed as the first argument won’t be executed.
+  // The second argument of useEffect function is referred to as the “dependency array”. 
+  //When the variable included inside the array didn’t change, the function passed as the first argument won’t be executed.
 
 
   return (
     <div className="App" >
+      
+      <GlobalStyle />
+
       {console.log(typeof(catchErrors))}
       {console.log(typeof(createGlobalStyle))}
 
       {/* <button onClick={decrementCount}>-</button>
           <span>{count}</span> */}
-      {/* <GlobalStyle /> */}
       <header className="App-header" >
         
         {!token ? (<StyledLoginButton
