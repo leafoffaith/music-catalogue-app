@@ -9,10 +9,21 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link, 
+  useLocation
 } from 'react-router-dom';
+import styled from 'styled-components/macro'
 
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 // const StyledLoginButton = styled.a`
 //   background-color: #1db954;
@@ -40,7 +51,15 @@ import {
 //   background-color: black;
 //   color: white;
 // }
-// `
+
+const StyledLoginButton = styled.a`
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  margin: 20px auto;
+  border-radius: 30px;
+  display: inline-block;
+`
 
 function App() {
 
@@ -88,27 +107,35 @@ function App() {
           <span>{count}</span> */}
       {/* <GlobalStyle /> */}
       <header className="App-header" >
-        {!token ? (<a
+        
+        {!token ? (<StyledLoginButton
           className="App-link"
           href="http://localhost:8888/login"> Log in to Spotify
-        </a>) : (
+        </StyledLoginButton>) : (
           <Router>
             <div>
+              <ScrollToTop />
               <Link to="/">Home</Link>
               <Link to="/top-artists">Top Artists</Link>
               <Link to="/top-tracks">Top Tracks</Link>
+              <Link to="/playlists/:id">Playlists</Link>
+              <Link to="/playlists">Playlist</Link>
             </div>
+            
             <Switch>
+              {/* The order of the routes is important */}
               <Route path="/top-artists">
                 <h1>Top Artists</h1>
               </Route>
               <Route path="/top-tracks">
                 <h1>Top Tracks</h1>
               </Route>
-              <Route path="/top-artists">
-                <h1>Top Playlists</h1>
+              <Route path="/playlists/:id">
+                <h1>Playlists</h1>
               </Route>
-
+              <Route path="/playlists">
+                <h1>Playlists</h1>
+              </Route>
               <Route path="/">
                 <>
                   <h1>Logged in!</h1>
