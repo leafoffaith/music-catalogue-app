@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { accessToken, logout, getCurrentUserProfile } from './spotify'
 import logo from './logo.svg';
 import './App.css';
+// import styled from 'styled-components';
+// import { createGlobalStyle } from 'styled-components';
 import { catchErrors } from './utils';
 import {
   BrowserRouter as Router,
@@ -11,8 +13,38 @@ import {
 } from 'react-router-dom';
 
 
+
+// const StyledLoginButton = styled.a`
+//   background-color: #1db954;
+//   color: #fff;
+//   padding: 10px 20px;
+//   margin: 20px auto;
+//   border-radius: 30px;
+//   display: inline-block;
+//   `;
+
+// const GlobalStyle = createGlobalStyle`
+// html {
+//   box-sizing: border-box;
+// }
+
+// *,
+// *:before,
+// *:after {
+//   box-sizing: inherit;
+// }
+
+// body {
+//   margin: 0;
+//   padding: 0;
+//   background-color: black;
+//   color: white;
+// }
+// `
+
 function App() {
 
+  console.log(typeof(accessToken));
   const [token, setToken] = useState(null);
   const [profile, setProfile] = useState(null);
 
@@ -27,9 +59,8 @@ function App() {
     const fetchData = async () => {
       const { data } = await getCurrentUserProfile();
       setProfile(data);
-      console.log(data)
+
     };
-    catchErrors(fetchData());
 
     // console.log(accessToken)
     // console.log(refreshToken)
@@ -40,16 +71,22 @@ function App() {
     //   .then(data => console.log(data))
     //   .catch(err => console.log(err))
     // }
+    catchErrors(fetchData());
 
   }, [])
+
 
   // The second argument of useEffect function is referred to as the “dependency array”. When the variable included inside the array didn’t change, the function passed as the first argument won’t be executed.
 
 
   return (
     <div className="App" >
+      {console.log(typeof(catchErrors))}
+      {console.log(typeof(createGlobalStyle))}
+
       {/* <button onClick={decrementCount}>-</button>
           <span>{count}</span> */}
+      {/* <GlobalStyle /> */}
       <header className="App-header" >
         {!token ? (<a
           className="App-link"

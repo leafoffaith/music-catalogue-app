@@ -16,7 +16,7 @@
     const CLIENT_SECRET = process.env.CLIENT_SECRET;
     const REDIRECT_URI = process.env.REDIRECT_URI;
 
-
+    
     // mongo auth stored in client/src/env file
     //APP CONFIG          
     mongoose.connect(process.env.MONGO_AUTH, {
