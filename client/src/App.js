@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import styled from 'styled-components';
 import { GlobalStyle } from './styles'
+import { Login, Profile } from './pages'
 import { createGlobalStyle } from 'styled-components';
 import { catchErrors } from './utils';
 import {
@@ -25,6 +26,7 @@ function ScrollToTop() {
   return null;
 }
 
+// Unused now replaced by Login component in Pages
 // const StyledLoginButton = styled.a`
 //   background-color: #1db954;
 //   color: #fff;
@@ -120,10 +122,13 @@ function App() {
           <span>{count}</span> */}
       <header className="App-header" >
         
-        {!token ? (<StyledLoginButton
+      {/* <StyledLoginButton
           className="App-link"
           href="http://localhost:8888/login"> Log in to Spotify
-        </StyledLoginButton>) : (
+        </StyledLoginButton> */}
+        {!token ? (<Login />) : (
+          <>
+          <button onClick={logout}>Log Out</button>
           <Router>
             <div>
               <ScrollToTop />
@@ -149,7 +154,7 @@ function App() {
                 <h1>Playlists</h1>
               </Route>
               <Route path="/">
-                <>
+                {/* <>
                   <h1>Logged in!</h1>
                   <button onClick={logout}>Log Out</button>
                   {profile && (
@@ -162,10 +167,12 @@ function App() {
                     </div>
                   )
                   }
-                </>
+                </> */}
+                <Profile />
               </Route>
             </Switch>
           </Router>
+          </>
         )}
       </header>
     </div>
