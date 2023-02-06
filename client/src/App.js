@@ -3,6 +3,7 @@ import { accessToken, logout, getCurrentUserProfile } from './spotify'
 import logo from './logo.svg';
 import './App.css';
 import styled from 'styled-components';
+import { GlobalStyle } from './styles'
 import { createGlobalStyle } from 'styled-components';
 import { catchErrors } from './utils';
 import {
@@ -33,32 +34,32 @@ function ScrollToTop() {
 //   display: inline-block;
 //   `;
 
-const GlobalStyle = createGlobalStyle`
-:root{
-  --black: #121212;
-  --green: #1db954;
-  --white: #ffffff;
+// const GlobalStyle = createGlobalStyle`
+// :root{
+//   --black: #121212;
+//   --green: #1db954;
+//   --white: #ffffff;
 
-  --font: 'Circular Std', -apple-systen, BlinkMacSystemFont, system-ui, sans-serif;
+//   --font: 'Circular Std', -apple-systen, BlinkMacSystemFont, system-ui, sans-serif;
 
-}
+// }
 
-html {
-  box-sizing: border-box;
-}
+// html {
+//   box-sizing: border-box;
+// }
 
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
+// *,
+// *:before,
+// *:after {
+//   box-sizing: inherit;
+// }
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: black;
-  color: white;
-}`
+// body {
+//   margin: 0;
+//   padding: 0;
+//   background-color: black;
+//   color: white;
+// }`
 
 const StyledLoginButton = styled.a`
   background-color: var(--green);
