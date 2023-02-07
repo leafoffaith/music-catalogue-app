@@ -142,3 +142,6 @@ export const accessToken = getAccessToken();
   */
 
  export const getCurrentUserProfile = () => axios.get('/me');
+ export const getCurrentUserPlaylists = (limit = 20) => {
+  return axios.get(`/me/playlists?limit=${limit}`);
+ }
