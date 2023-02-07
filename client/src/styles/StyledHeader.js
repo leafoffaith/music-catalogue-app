@@ -46,8 +46,6 @@ const StyledHeader = styled.header`
     margin-right: var(--spacing-lg);
     box-shadow: 0 4px 60px rgb(0 0 0 / 50%);
     background-color: var(--dark-grey);
-    //looks at type prop and if it is user then border radius is 50
-    //to ensure profile is circle 
     border-radius: ${props => props.type === 'user' ? '50%' : '0'};
 
     @media (min-width: 768px) {

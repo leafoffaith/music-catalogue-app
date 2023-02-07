@@ -1,22 +1,38 @@
 import { useState, useEffect } from 'react';
 import { catchErrors } from '../utils';
-import { getCurrentUserProfile, getCurrentUserPlaylists } from '../spotify';
+import {
+  getCurrentUserProfile,
+  getCurrentUserPlaylists,
+  getTopArtists,
+  getTopTracks
+} from '../spotify';
+import {
+  SectionWrapper,
+  ArtistsGrid,
+  TrackList,
+  PlaylistsGrid
+} from '../components';
 import { StyledHeader } from '../styles';
-
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [playlists, setPlaylists] = useState(null);
+  const [topArtists, setTopArtists] = useState(null);
+  const [topTracks, setTopTracks] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const userProfile = await getCurrentUserProfile();
       setProfile(userProfile.data);
 
-      const userPlaylist = await getCurrentUserPlaylists;
-      setPlaylists(userPlaylist.data);
+      const userPlaylists = await getCurrentUserPlaylists();
+      setPlaylists(userPlaylists.data);
 
-      console.log(userPlaylist.data);
+      const userTopArtists = await getTopArtists();
+      setTopArtists(userTopArtists.data);
+
+      const userTopTracks = await getTopTracks();
+      setTopTracks(userTopTracks.data);
     };
 
     catchErrors(fetchData());
@@ -29,7 +45,7 @@ const Profile = () => {
           <StyledHeader type="user">
             <div className="header__inner">
               {profile.images.length && profile.images[0].url && (
-                <img className="header__img" src={profile.images[0].url} alt="Avatar" />
+                <img className="header__img" src={profile.images[0].url} alt="Avatar"/>
               )}
               <div>
                 <div className="header__overline">Profile</div>
@@ -45,6 +61,22 @@ const Profile = () => {
               </div>
             </div>
           </StyledHeader>
+
+          {topArtists && topTracks && playlists && (
+            <main>
+              <SectionWrapper title="Top artists this month" seeAllLink="/top-artists">
+                <ArtistsGrid artists={topArtists.items.slice(0, 10)} />
+              </SectionWrapper>
+
+              <SectionWrapper title="Top tracks this month" seeAllLink="/top-tracks">
+                <TrackList tracks={topTracks.items.slice(0, 10)} />
+              </SectionWrapper>
+
+              <SectionWrapper title="Playlists" seeAllLink="/playlists">
+                <PlaylistsGrid playlists={playlists.items.slice(0, 10)} />
+              </SectionWrapper>
+            </main>
+          )}
         </>
       )}
     </>
