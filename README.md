@@ -1,4 +1,4 @@
-Live at https://polar-reef-59321.herokuapp.com/albums  :D
+Live at https://polar-reef-59321.herokuapp.com :D
 
 UPDATE: App being reworked to implement Spotify's Web API
 
