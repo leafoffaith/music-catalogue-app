@@ -1,3 +1,7 @@
+    
+    const path = require('path');
+    // Priority serve any static files.
+app.use(express.static(path.resolve(__dirname, './client/build')));
     // const { authenticate } = require('passport');
 
     const { request, response, application } = require('express');
@@ -18,7 +22,6 @@
     const FRONTEND_URI = process.env.FRONTEND_URI;
     const PORT = process.env.PORT || 8888;
 
-    const path = require('path');
 
     
     // mongo auth stored in client/src/env file
@@ -329,6 +332,11 @@
     //PORT
     const port = 8888;
 
-    app.listen(port, () => {
-        console.log(`Now listening on Port: ${port}`);
+    // All remaining requests return the React app, so it can handle routing.
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
+  });
+
+    app.listen(PORT, () => {
+        console.log(`Now listening on Port: ${PORT}`);
     })
