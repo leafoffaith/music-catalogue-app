@@ -1,7 +1,6 @@
     
     const path = require('path');
     // Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, './client/build')));
     // const { authenticate } = require('passport');
 
     const { request, response, application } = require('express');
@@ -14,6 +13,9 @@ app.use(express.static(path.resolve(__dirname, './client/build')));
         methodOverride = require('method-override'),
         queryString = require('query-string'),
         axios = require('axios')
+
+app.use(express.static(path.resolve(__dirname, './client/build')));
+
     
     //FOR SPOTIFY
     const CLIENT_ID = process.env.CLIENT_ID;
@@ -333,7 +335,7 @@ app.use(express.static(path.resolve(__dirname, './client/build')));
     const port = 8888;
 
     // All remaining requests return the React app, so it can handle routing.
-app.get('*', (req, res) => {
+    app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, './client/build', 'index.html'));
   });
 
