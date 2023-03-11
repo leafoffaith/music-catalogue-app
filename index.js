@@ -15,6 +15,10 @@
     const CLIENT_ID = process.env.CLIENT_ID;
     const CLIENT_SECRET = process.env.CLIENT_SECRET;
     const REDIRECT_URI = process.env.REDIRECT_URI;
+    const FRONTEND_URI = process.env.FRONTEND_URI;
+    const PORT = process.env.PORT || 8888;
+
+    const path = require('path');
 
     
     // mongo auth stored in client/src/env file
@@ -141,7 +145,8 @@
                     
                     // res.write("hellooo")
                     //rerdirect to react app
-                    res.redirect(`http://localhost:3000/?${queryParams}`)
+                    // res.redirect(`http://localhost:3000/?${queryParams}`)
+                    res.redirect(`${FRONTEND_URI}/?${queryParams}`);
                 
                 } else {
 
@@ -184,19 +189,6 @@
             console.log('you have reached the trending page')
             res.send("THIS IS THE TRENDING PAGE YAY!");
         })
-        //TO IMPLEMENT
-        //on ('/')
-        // it needs to first redirect to the trending page which will fetch Spotify trending based on location
-        // if location is not accessible or provided it defaults to the US top 50 pop
-
-    //albums will show list based on logged in user only, so navbar will have 'your list' which redirects to /albums
-    //but first checks whether or not the user is logged in
-
-    //in the albums section, while adding a new album, implement the option to add using spotify (Fetch)
-    //albums can also be manually added
-    //also, add another field that adds a link to the spotify artist page as well as album page
-    //Artist complete discog + View album on Spotify
-
 
     app.get('/albums', (req, res) => {
         Catalog.find({}, function(err, catalogs) {
