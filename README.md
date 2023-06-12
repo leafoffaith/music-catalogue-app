@@ -1,4 +1,4 @@
-Live at https://polar-reef-59321.herokuapp.com :D
+Refer to the .evn.example on how to create a .env file ;)
 
 12.03
 - Now fetches data using API.
